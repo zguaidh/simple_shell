@@ -77,7 +77,7 @@ char *str_concat(char *s1, char *s2)
 
 int print_char(char c)
 {
-	return (write(1, &c, 1));
+	return (write(STDERR_FILENO, &c, 1));
 }
 /**
  *_print_err - prints Error message to the stdout

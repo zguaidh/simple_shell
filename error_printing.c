@@ -14,7 +14,8 @@ void print_error(char **arg, char *prompt, int count)
 
 	_print_err(name_of_program);
 	_print_err(": ");
-	write(STDERR_FILENO, count, 1);
+	print_number(count);
+	//write(STDERR_FILENO, count, 1);
 	_print_err(": ");
 	_print_err(name_of_command);
 }
