@@ -1,3 +1,5 @@
+
+
 #include "main.h"
 /**
  *concat_path - concatenate the input with the PATH environment variables
@@ -13,7 +15,7 @@ char **get_path(char **environ)
 	char *buff = NULL;
 	int  i = 0;
 
-	path_directories = malloc(sizeof(char *) * 50);
+	path_directories = malloc(sizeof(char *) * 1024);
 	if (path_directories == NULL)
 	{
 		perror("Memory allocation failed");
@@ -55,13 +57,14 @@ char **get_path(char **environ)
 	return (path_directories);
 }
 
-char *path_finder(char **exec_arg, char **av, char **environ)
+char *path_finder(char **exec_arg, char **environ)
 {
-	char **array_path, *file_path = NULL;
+	char **array_path = get_path(environ);
+	char *file_path = NULL;
 	int len = 0, i = 0;
-
-	array_path = get_path(environ);
-
+	
+	printf("Before\n");
+	
 	for (i = 0; array_path[i] != NULL; i++)
 	{
 		len = strlen(exec_arg[0]) + strlen(array_path[i]) + 2;
@@ -69,6 +72,8 @@ char *path_finder(char **exec_arg, char **av, char **environ)
 		strcpy(file_path, array_path[i]);
 		strcat(file_path, "/");
 		strcat(file_path, exec_arg[0]);
+		printf("file_path inside:%s\n", file_path);
+
 		if (access(file_path, F_OK) != -1)
 			break;
 		free(file_path);
@@ -76,20 +81,4 @@ char *path_finder(char **exec_arg, char **av, char **environ)
 	printf("Command found: %s\n", file_path);
 
 	return (file_path);
-}
-
-int main(int ac, char **av, char **environ)
-{
-	char **exec_arg = NULL;
-	int i = 0;
-
-	if (ac < 2)
-	{
-		printf("Enter argument\n");
-	}
-
-	path_finder(exec_arg, av, environ);
-
-	return (0);
-
 }

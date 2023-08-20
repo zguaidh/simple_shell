@@ -51,9 +51,12 @@ void execute(char *filename, char **av, char **env, int count)
 void exec_from_path(char *filename, char **av, char **env, int count)
 {
 	if (access(filename, F_OK) == 0)
+	{
 		execute(filename, av, env, count);
+	}
 	else
 	{
-		execute(concat_path(filename), av, env, count);
+	//	filename = path_finder(exec_arg, environ);
+		execute(filename, av, env, count);
 	}
 }

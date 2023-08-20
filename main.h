@@ -44,6 +44,8 @@ void execute(char *filename, char **av, char **env, int count);
 void exec_from_path(char *filename, char **av, char **env, int count);
 char *concat_path(char *filename);
 void free_contents(char **str);
+char *path_finder(char **exec_arg, char **environ);
+char **get_path(char **environ);
 
 /* Builtins */
 
