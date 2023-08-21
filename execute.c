@@ -9,7 +9,7 @@
  *Return: no return
  */
 
-void execute(char *filename, char **exec_arg, int count)
+void execute(char *filename, char **exec_arg)
 {
 	pid_t child_pid;
 	int status = 0;
@@ -22,9 +22,12 @@ void execute(char *filename, char **exec_arg, int count)
 	{
 		if (execve(filename, exec_arg, environ) == -1)
 		{
-			print_error_exec(exec_arg, filename, count);
-			errno = 127;
-			exit(errno);
+			if (access(filename, X_OK) != 0)
+			{
+				print_error_exec();
+				errno = 127;
+				exit(errno);
+			}
 		}
 	}
 	else
@@ -48,11 +51,10 @@ void execute(char *filename, char **exec_arg, int count)
  *Return: no return
  */
 
-void exec_from_path(char **exec_arg, int count)
+void exec_from_path(char **exec_arg)
 {
-
 	if (access(exec_arg[0], F_OK) == 0)
-		execute(exec_arg[0], exec_arg, count);
+		execute(exec_arg[0], exec_arg);
 	else
-		execute(concat_path(exec_arg), exec_arg, count);
+		execute(concat_path(exec_arg), exec_arg);
 }

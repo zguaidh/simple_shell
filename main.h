@@ -39,9 +39,10 @@ char **copy_token(char *str, char *delim);
 int num_tokens(char **str);
 char *name_of_program;
 char *name_of_command;
+int count;
 int exit_status;
-void execute(char *filename, char **exec_arg, int count);
-void exec_from_path(char **exec_arg, int count);
+void execute(char *filename, char **exec_arg);
+void exec_from_path(char **exec_arg);
 char *concat_path(char **exec_arg);
 void free_contents(char **str);
 char *concat_path(char **exec_arg);
@@ -68,7 +69,7 @@ char *_strstr(char *haystack, char *needle);
 int print_number(int n);
 
 /* Error printing */
-void print_error(char **arg, char *prompt, int count);
-void print_error_exec(char **arg, char *command, int count);
+void print_error(void);
+void print_error_exec(void);
 
 #endif

@@ -21,8 +21,8 @@ void exit_req(char *str)
 
 void env_req(char *str)
 {
-	int i, j;
 	(void)str;
+	int i, j;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{

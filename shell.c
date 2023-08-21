@@ -15,7 +15,7 @@ int main(int ac, char **av, char **env)
 	char *buff = NULL, *prompt = ":) ", **exec_arg;
 	ssize_t read;
 	size_t buff_len = 0;
-	int i = 0, count = 0;
+	int i = 0;
 	bool interactive = isatty(STDIN_FILENO);
 	(void)ac;
 
@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 			if (i == -1)
 			{
 				name_of_command = exec_arg[0];
-				exec_from_path(exec_arg, count);
+				exec_from_path(exec_arg);
 			}
 			free_contents(exec_arg);
 		}

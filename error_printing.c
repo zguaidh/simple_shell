@@ -7,10 +7,8 @@
  *
  * Return: no return
  */
-void print_error(char **arg, char *prompt, int count)
+void print_error(void)
 {
-	(void)arg;
-	(void)prompt;
 
 	_print_err(name_of_program);
 	_print_err(": ");
@@ -28,9 +26,9 @@ void print_error(char **arg, char *prompt, int count)
  *
  * Return: no return
  */
-void print_error_exec(char **arg, char *command, int count)
+void print_error_exec(void)
 {
-	print_error(arg, command, count);
+	print_error();
 	_print_err(": ");
 	_print_err("not found\n");
 }
