@@ -2,11 +2,11 @@
 
 #include "main.h"
 /**
- *concat_path - concatenate the input with the PATH environment variables
+ *get_path - extractes path directories from the path envirnmnt variable
  *
- *@filename: the input to be concatenated
+ *@environ: an array of strings representing the envirenmnt variables
  *
- * Return: a pointer to the concatenated path, or otherwise NULL
+ * Return: an array of strings containing individual pathdirectories
  */
 char **get_path(char **environ)
 {
@@ -21,7 +21,6 @@ char **get_path(char **environ)
 		perror("Memory allocation failed");
 		return (NULL);
 	}
-
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		if (strstr(environ[i], "PATH") != NULL && environ[i][4] == '=')
@@ -46,25 +45,28 @@ char **get_path(char **environ)
 		buff = strtok(NULL, ":");
 		i++;
 	}
-
 	if (path_directories[0] == NULL)
-	{
 		i++;
-	}
-
 	path_directories[i] = NULL;
-
 	return (path_directories);
 }
-
+/**
+ *path_finder - Searches for the full path of an executable
+ *within specified directories.
+ *
+ *@exec_arg: the execubale arguments
+ *@environ: the environment variables
+ *
+ *Return: a string containing the full path to the executable
+ */
 char *path_finder(char **exec_arg, char **environ)
 {
 	char **array_path = get_path(environ);
 	char *file_path = NULL;
 	int len = 0, i = 0;
-	
+
 	printf("Before\n");
-	
+
 	for (i = 0; array_path[i] != NULL; i++)
 	{
 		len = strlen(exec_arg[0]) + strlen(array_path[i]) + 2;

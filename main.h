@@ -14,10 +14,7 @@
 
 /* MACRO */
 
-char *name_of_program;
-char *name_of_command;
 extern char **environ;
-int exit_status;
 
 /* Structures */
 
@@ -40,6 +37,9 @@ int _stat(char *filename);
 void tokenize(char *str, char *delim);
 char **copy_token(char *str, char *delim);
 int num_tokens(char **str);
+char *name_of_program;
+char *name_of_command;
+int exit_status;
 void execute(char *filename, char **av, char **env, int count);
 void exec_from_path(char *filename, char **av, char **env, int count);
 char *concat_path(char *filename);

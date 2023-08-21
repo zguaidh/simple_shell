@@ -56,7 +56,7 @@ void exec_from_path(char *filename, char **av, char **env, int count)
 	}
 	else
 	{
-	//	filename = path_finder(exec_arg, environ);
+	/*	filename = path_finder(exec_arg, environ);*/
 		execute(filename, av, env, count);
 	}
 }
