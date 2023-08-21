@@ -40,12 +40,12 @@ int num_tokens(char **str);
 char *name_of_program;
 char *name_of_command;
 int exit_status;
-void execute(char *filename, char **av, char **env, int count);
-void exec_from_path(char *filename, char **av, char **env, int count);
-char *concat_path(char *filename);
+void execute(char *filename, char **exec_arg, int count);
+void exec_from_path(char **exec_arg, int count);
+char *concat_path(char **exec_arg);
 void free_contents(char **str);
-char *path_finder(char **exec_arg, char **environ);
-char **get_path(char **environ);
+char *concat_path(char **exec_arg);
+char **get_path(void);
 
 /* Builtins */
 
@@ -61,8 +61,9 @@ void _print_err(char *str);
 int print_char(char c);
 int _strlen(char *str);
 char *_strdup(char *str);
-char *str_concat(char *s1, char *s2);
+char *_strcat(char *s1, char *s2);
 int _strcmp(char *s1, char *s2);
+char *_strcpy(char *s1, char *s2);
 char *_strstr(char *haystack, char *needle);
 int print_number(int n);
 

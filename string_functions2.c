@@ -27,7 +27,7 @@ char *_strstr(char *haystack, char *needle)
 }
 
 /**
- *str_concat - concatenate two strings to create a new string
+ *_strcat - concatenate two strings to create a new string
  *
  *@s1: the first string to be concatenated
  *@s2: the second string to be concatenated
@@ -35,38 +35,23 @@ char *_strstr(char *haystack, char *needle)
  *Return: a pointer to newly created concatenated string
  */
 
-char *str_concat(char *s1, char *s2)
+char *_strcat(char *s1, char *s2)
 {
-	char *result;
-	int i, j, len1, len2, len;
+	int a = 0, b = 0;
 
-	len1 = len2 = 0;
-	if (s1 != NULL)
+	while (s1[a] != '\0')
+		a++;
+
+	while (s2[b] != '\0')
 	{
-		i = 0;
-		while (s1[i++] != '\0')
-			len1++;
-	}
-	if (s2 != NULL)
-	{
-		i = 0;
-		while (s2[i++] != '\0')
-			len2++;
+		s1[a] = s2[b];
+		a++;
+		b++;
 	}
 
-	len = len1 + len2;
-	result = (char *)malloc((len + 1) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
+	s1[a] = '\0';
 
-	for (i = 0; i < len1; i++)
-		result[i] = s1[i];
-
-	for (j = 0; j < len2; j++, i++)
-	result[i] = s2[j];
-
-	result[len] = '\0';
-	return (result);
+	return (s1);
 }
 /**
  *print_char - prints a single  character to stdout
@@ -88,4 +73,17 @@ int print_char(char c)
 void _print_err(char *str)
 {
 	write(STDERR_FILENO, str, _strlen(str));
+}
+
+char *_strcpy(char *s1, char *s2)
+{
+	int i = 0;
+
+	s1[i] = s2[i];
+	while (s2[i] != '\0')
+	{
+		i++;
+		s1[i] = s2[i];
+	}
+	return (s1);
 }

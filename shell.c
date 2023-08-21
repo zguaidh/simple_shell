@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 			if (i == -1)
 			{
 				name_of_command = exec_arg[0];
-				exec_from_path(exec_arg[0], exec_arg, env, count);
+				exec_from_path(exec_arg, count);
 			}
 			free_contents(exec_arg);
 		}
