@@ -1,10 +1,6 @@
 #include "main.h"
 /**
  *print_error - prints a generic error message with details about the error
- *@arg: the command and its arguments
- *@prompt: the name of the program
- *@count: the number of tokens in the arg array
- *
  * Return: no return
  */
 void print_error(void)
@@ -19,10 +15,6 @@ void print_error(void)
 }
 /**
  *print_error_exec - prints an error message for a command execution failure
- *
- *@arg: the command and its arguments
- *@command: the name of the command that failed to execute
- *@count: the number of tokens in the arg array
  *
  * Return: no return
  */

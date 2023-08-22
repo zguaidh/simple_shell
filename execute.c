@@ -2,9 +2,7 @@
 /**
  *execute - execute a program with the given filename and arguments
  *@filename: the name of the program to execute
- *@av: the array of arguments
- *@env: an array of settings representing the environment variables
- *@count: number of strings of the array of arguments
+ *@exec_arg: array of commands from command line
  *
  *Return: no return
  */
@@ -15,7 +13,7 @@ void execute(char *filename, char **exec_arg)
 	int status = 0;
 
 	if (filename == NULL)
-		exit_status == 0;
+		exit_status = 0;
 
 	child_pid = fork();
 	if (child_pid == 0)
@@ -43,10 +41,7 @@ void execute(char *filename, char **exec_arg)
 
 /**
  *exec_from_path - execute a filname considering its path
- *@filename: the name of the program to execute
- *@av: the array of arguments
- *@env: an array of settings representing the environment variables
- *@count: number of strings of the array of arguments
+ * @exec_arg: array of commands from command line
  *
  *Return: no return
  */
