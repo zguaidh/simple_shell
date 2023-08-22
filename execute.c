@@ -2,9 +2,7 @@
 /**
  *execute - execute a program with the given filename and arguments
  *@filename: the name of the program to execute
- *@av: the array of arguments
- *@env: an array of settings representing the environment variables
- *@count: number of strings of the array of arguments
+ *@exec_arg: th arguments
  *
  *Return: no return
  */
@@ -43,10 +41,8 @@ void execute(char *filename, char **exec_arg)
 
 /**
  *exec_from_path - execute a filname considering its path
- *@filename: the name of the program to execute
- *@av: the array of arguments
- *@env: an array of settings representing the environment variables
- *@count: number of strings of the array of arguments
+ *
+ *@exec_arg: the array of strings of the arguments
  *
  *Return: no return
  */

@@ -74,7 +74,14 @@ void _print_err(char *str)
 {
 	write(STDERR_FILENO, str, _strlen(str));
 }
-
+/**
+ *_strcpy - copy the first string to the second string
+ *
+ *@s1: the first string
+ *@s2: the second string to be copied
+ *
+ *Return: a string
+ */
 char *_strcpy(char *s1, char *s2)
 {
 	int i = 0;
