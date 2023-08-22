@@ -15,9 +15,7 @@ void execute(char *filename, char **exec_arg)
 	int status = 0;
 
 	if (filename == NULL)
-	{
-		exit_status = 0;
-	}
+		exit_status == 0;
 
 	child_pid = fork();
 	if (child_pid == 0)
@@ -28,7 +26,6 @@ void execute(char *filename, char **exec_arg)
 			{
 				print_error_exec();
 				errno = 127;
-				free_contents(exec_arg);
 				exit(errno);
 			}
 		}
@@ -56,12 +53,8 @@ void execute(char *filename, char **exec_arg)
 
 void exec_from_path(char **exec_arg)
 {
-	char *filename;
-
-	filename = concat_path(exec_arg);
 	if (access(exec_arg[0], F_OK) == 0)
 		execute(exec_arg[0], exec_arg);
 	else
-		execute(filename, exec_arg);
-
+		execute(concat_path(exec_arg), exec_arg);
 }

@@ -3,23 +3,21 @@
 char **get_path(void)
 {
 	char *path = getenv("PATH"), *token, **path_directories = NULL;
+	char *error_msg = "Error: PATH not found!\n";
 	char *buff = NULL;
 	int i = 0;
 
 	if (path == NULL)
-	{
-		print_error_exec();
-		exit_status = 127;
-		exit(exit_status);
-	}
+		write(2, error_msg, strlen(error_msg));
 
-	path_directories = malloc(sizeof(char *) * 50);
+	path = NULL;
+
+	path_directories = malloc(sizeof(char *) * 1024);
 	if (path_directories == NULL)
 	{
 		perror("Memory allocation failed");
 		return (NULL);
 	}
-	
 	while (environ[i] != NULL)
 	{
 		if (strstr(environ[i], "PATH") != NULL && environ[i][4] == '=')
@@ -47,7 +45,6 @@ char **get_path(void)
 		i++;
 
 	path_directories[i] = NULL;
-
 	return (path_directories);
 }
 /**
@@ -63,8 +60,8 @@ char *concat_path(char **exec_arg)
 	char *file_path = NULL;
 	int i = 0, len = 0;
 
-	for (i = 0; path[i]; i++)
-	{	
+	for (i = 0; path[i] != NULL; i++)
+	{
 		len = _strlen(exec_arg[0]) + _strlen(path[i]) + 2;
 		file_path = malloc(len * sizeof(char *));
 		_strcpy(file_path, path[i]);
