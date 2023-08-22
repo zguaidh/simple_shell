@@ -42,6 +42,6 @@ int main(int ac, char **av, char **env)
 		else
 			exit_req(buff);
 	}
-	free(buff);
+	//free(buff);	
 	return (0);
 }

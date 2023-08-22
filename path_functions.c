@@ -47,6 +47,7 @@ char **get_path(void)
 		i++;
 
 	path_directories[i] = NULL;
+	free(token), free(buff);
 
 	return (path_directories);
 }
@@ -75,5 +76,6 @@ char *concat_path(char **exec_arg)
 		free(file_path);
 	}
 
+	free_contents(path);
 	return (file_path);
 }
