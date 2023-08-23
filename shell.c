@@ -18,6 +18,7 @@ int main(int ac, char **av, char **env)
 	int i = 0;
 	bool interactive = isatty(STDIN_FILENO);
 	(void)ac;
+	(void)env;
 
 	while (1)
 	{
