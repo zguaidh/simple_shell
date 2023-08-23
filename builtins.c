@@ -25,13 +25,12 @@ void exit_req(char *str, char **env)
 
 void env_req(char *str, char **env)
 {
-	int i, j;
+	int i;
 	(void)str;
 
 	for (i = 0; env[i]; i++)
 	{
-		for (j = 0; env[i][j]; j++)
-			write(1, &env[i][j], 1);
+		write(1, env[i], _strlen(env[i]);
 		j = 0;
 		write(1, "\n", 1);
 	}
