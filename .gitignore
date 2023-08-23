@@ -1,3 +1,5 @@
 *.c.swp
 *.out
 ~*
+*.sh
+*.bash

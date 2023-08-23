@@ -33,7 +33,7 @@ int main(int ac, char **av, char **env)
 				free_contents(exec_arg);
 				continue;
 			}
-			count = num_tokens(exec_arg);
+			count += num_tokens(exec_arg);
 			i = _build(exec_arg, buff, env);
 			name_of_program = av[0];
 			if (i == -1)
@@ -44,7 +44,7 @@ int main(int ac, char **av, char **env)
 			free_contents(exec_arg);
 		}
 		else
-			exit_req(buff, env);
+			exit_req(buff, env, exec_arg);
 	}
 	return (0);
 }
