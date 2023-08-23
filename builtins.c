@@ -55,14 +55,22 @@ void exit_req(char *str, char **env, char **args)
 
 void env_req(char *str, char **env, char **args)
 {
-	int i;
+	int i, j;
 	(void)str;
 	(void)args;
 
-	for (i = 0; env[i]; i++)
+	for (i = 0; env[i] != NULL; i++)
 	{
-		write(1, env[i], _strlen(env[i]));
-		write(1, "\n", 1);
+		if (env[i] != NULL)
+		{
+			j = 0;
+			while (env[i][j] != '\0')
+			{
+				write(1, &env[i][j], 1);
+				j++;
+			}
+			write(1, "\n", 1);
+		}
 	}
 }
 /**
