@@ -2,14 +2,15 @@
 /**
  *exit_req - exit request function
  *@str: a strings that needs to be free
+ *@env: an array of strings representing environment variables
  *
- *Return: no return value
+ * Return: no return value
  */
 
 void exit_req(char *str, char **env)
 {
 	(void)env;
-	
+
 	free(str);
 	errno = exit_status;
 	exit(errno);
@@ -17,6 +18,7 @@ void exit_req(char *str, char **env)
 /**
  *env_req - Environment request function
  *@str: a pointer to a string (not used)
+ *@env: an array of strings representing environment variables
  *
  *Return: no return value
  */
@@ -38,6 +40,7 @@ void env_req(char *str, char **env)
  *get_builtins - searches for a builtin command and returns a function pointer
  *to the correspendind built-in function or NULL otherwise
  *@str: a string representing the name of the built-in
+ *@env: an array of strings representing environment variables
  *
  *Return: no return value
  */
@@ -64,7 +67,9 @@ void (*get_builtins(char *str, char **env))(char *str, char **env)
  *_build - build and execute function
  *@exec_arg: an array of strings representing the command and its arguments
  *@buff: a string buffer for a possible usein the built-in function
- *Return: no return value
+ *@env: an array of strings representing environment variables
+ *
+ * Return: no return value
  */
 
 int _build(char **exec_arg, char *buff, char **env)
@@ -80,7 +85,6 @@ int _build(char **exec_arg, char *buff, char **env)
 		free_contents(exec_arg);
 		exit_status = 1;
 	}
-	
 
 	func(buff, env);
 	return (exit_status);
