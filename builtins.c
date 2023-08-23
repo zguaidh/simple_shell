@@ -6,8 +6,10 @@
  *Return: no return value
  */
 
-void exit_req(char *str)
+void exit_req(char *str, char **env)
 {
+	(void)env;
+	
 	free(str);
 	errno = exit_status;
 	exit(errno);
@@ -19,16 +21,16 @@ void exit_req(char *str)
  *Return: no return value
  */
 
-void env_req(char *str)
+void env_req(char *str, char **env)
 {
 	int i, j;
 	(void)str;
 
-	for (i = 0; environ[i] != NULL; i++)
+	for (i = 0; env[i]; i++)
 	{
-		for (j = 0; environ[i][j] != '\0'; j++)
-			write(1, &environ[i][j], 1);
-
+		for (j = 0; env[i][j]; j++)
+			write(1, &env[i][j], 1);
+		j = 0;
 		write(1, "\n", 1);
 	}
 }
@@ -39,7 +41,7 @@ void env_req(char *str)
  *
  *Return: no return value
  */
-void (*get_builtins(char *str))(char *str)
+void (*get_builtins(char *str, char **env))(char *str, char **env)
 {
 	builtins builtin[] = {
 		{"exit", exit_req},
@@ -47,6 +49,7 @@ void (*get_builtins(char *str))(char *str)
 		{NULL, NULL}
 	};
 	int i = 0;
+	(void)env;
 
 	while (builtin[i].built != NULL)
 	{
@@ -54,6 +57,7 @@ void (*get_builtins(char *str))(char *str)
 			return (builtin[i].f);
 		i++;
 	}
+
 	return (NULL);
 }
 /**
@@ -63,12 +67,12 @@ void (*get_builtins(char *str))(char *str)
  *Return: no return value
  */
 
-int _build(char **exec_arg, char *buff)
+int _build(char **exec_arg, char *buff, char **env)
 {
-	void (*func)(char *);
+	void (*func)(char *, char **);
 	int exit_status;
 
-	func = get_builtins(exec_arg[0]);
+	func = get_builtins(exec_arg[0], env);
 	if (func == NULL)
 		return (-1);
 	if (_strcmp("exit", exec_arg[0]) == 0)
@@ -76,7 +80,8 @@ int _build(char **exec_arg, char *buff)
 		free_contents(exec_arg);
 		exit_status = 1;
 	}
+	
 
-	func(buff);
+	func(buff, env);
 	return (exit_status);
 }

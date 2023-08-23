@@ -28,7 +28,7 @@ extern char **environ;
 typedef struct builtins
 {
 	char *built;
-	void (*f)(char *);
+	void (*f)(char *, char **);
 } builtins;
 
 /* Main functions */
@@ -50,10 +50,10 @@ char **get_path(void);
 
 /* Builtins */
 
-void exit_req(char *str);
-void env_req(char *str);
-void (*get_builtins(char *str))(char *str);
-int _build(char **exec_arg, char *buff);
+void exit_req(char *str, char **env);
+void env_req(char *str, char **env);
+void (*get_builtins(char *str, char **env))(char *str, char **env);
+int _build(char **exec_arg, char *buff, char **env);
 
 /* Helper functions */
 
