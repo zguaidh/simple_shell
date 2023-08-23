@@ -30,8 +30,7 @@ void env_req(char *str, char **env)
 
 	for (i = 0; env[i]; i++)
 	{
-		write(1, env[i], _strlen(env[i]);
-		j = 0;
+		write(1, env[i], _strlen(env[i]));
 		write(1, "\n", 1);
 	}
 }
