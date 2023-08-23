@@ -36,17 +36,14 @@ char **get_path(void)
 		path++;
 	token  = _strdup(path);
 	buff = strtok(token, ":");
-	i = 0;
-	while (buff != NULL)
+	for (i = 0; buff != NULL; i++)
 	{
 		path_directories[i] = _strdup(buff);
 		buff = strtok(NULL, ":");
-		i++;
 	}
 	if (path_directories[0] == NULL)
 		i++;
 	path_directories[i] = NULL;
-	printf("Token - get_path: Free memory\n");
 	free(token);
 	return (path_directories);
 }
@@ -71,24 +68,9 @@ char *concat_path(char **exec_arg)
 		_strcat(file_path, "/");
 		_strcat(file_path, exec_arg[0]);
 		if (access(file_path, F_OK) != -1)
-		{
 			break;
-		}/*
-		else
-		{
-			file_path = NULL;
-		}*/
-		printf("file_path: Free memory\n");
 		free(file_path);
 	}
-/*
-	if (file_path == NULL)
-	{
-		print_error_exec();
-		errno = 127;
-		printf("File_path: Free if file path NULL\n");
-		free(file_path);
-	}*/
 
 	free_contents(path);
 	return (file_path);

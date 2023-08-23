@@ -40,12 +40,10 @@ int main(int ac, char **av, char **env)
 				name_of_command = exec_arg[0];
 				exec_from_path(exec_arg);
 			}
-			printf("shell: Free contents of exec arg\n");
 			free_contents(exec_arg);
 		}
 		else
 			exit_req(buff);
-		//free(buff);
 	}
 	return (0);
 }
