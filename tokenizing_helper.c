@@ -59,6 +59,7 @@ char **copy_token(char *str, char *delim)
 		buff_arg = strtok(NULL, delim);
 	}
 	exec_arg[count] = NULL;
+
 	return (exec_arg);
 }
 /**

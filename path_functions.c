@@ -46,6 +46,8 @@ char **get_path(void)
 	if (path_directories[0] == NULL)
 		i++;
 	path_directories[i] = NULL;
+	printf("Token - get_path: Free memory\n");
+	free(token);
 	return (path_directories);
 }
 /**
@@ -61,17 +63,33 @@ char *concat_path(char **exec_arg)
 	char *file_path = NULL;
 	int i = 0, len = 0;
 
-	for (i = 0; path[i]; i++)
+	for (i = 0; path[i] != NULL; i++)
 	{
 		len = _strlen(exec_arg[0]) + _strlen(path[i]) + 2;
-		file_path = malloc(len * sizeof(char *));
+		file_path = malloc(len);
 		_strcpy(file_path, path[i]);
 		_strcat(file_path, "/");
 		_strcat(file_path, exec_arg[0]);
 		if (access(file_path, F_OK) != -1)
+		{
 			break;
+		}/*
+		else
+		{
+			file_path = NULL;
+		}*/
+		printf("file_path: Free memory\n");
 		free(file_path);
 	}
+/*
+	if (file_path == NULL)
+	{
+		print_error_exec();
+		errno = 127;
+		printf("File_path: Free if file path NULL\n");
+		free(file_path);
+	}*/
 
+	free_contents(path);
 	return (file_path);
 }

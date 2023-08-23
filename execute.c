@@ -11,22 +11,33 @@ void execute(char *filename, char **exec_arg)
 {
 	pid_t child_pid;
 	int status = 0;
-
+/*
 	if (filename == NULL)
-		exit_status = 0;
+	{
+		printf("execute: Free if filename is NULL\n");
+		free(filename);
+		free_contents(exec_arg);
+		exit_status = 127;
+		;
+	}*/
 
 	child_pid = fork();
 	if (child_pid == 0)
 	{
+		//execve(filename, exec_arg, environ);
 		if (execve(filename, exec_arg, environ) == -1)
 		{
 			if (access(filename, X_OK) != 0)
 			{
 				print_error_exec();
 				errno = 127;
+				printf("execute: Free filename if not found\n");
+				//free(filename);
+				free_contents(exec_arg);
 				exit(errno);
 			}
 		}
+		//free(filename);
 	}
 	else
 	{
@@ -48,8 +59,27 @@ void execute(char *filename, char **exec_arg)
 
 void exec_from_path(char **exec_arg)
 {
+	char *filename;
+
+	filename = concat_path(exec_arg);
+
 	if (access(exec_arg[0], F_OK) == 0)
+	{
 		execute(exec_arg[0], exec_arg);
+	}
 	else
-		execute(concat_path(exec_arg), exec_arg);
+	{
+		/*
+		if (filename == NULL)
+		{
+			print_error_exec();
+			errno = 127;
+			free(filename);
+		}*/
+		execute(filename, exec_arg);
+		//free(filename);
+	}
+/*
+	if (access(exec_arg[0], F_OK) != 0)
+		free(filename);*/
 }

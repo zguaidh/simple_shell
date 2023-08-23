@@ -28,7 +28,10 @@ int main(int ac, char **av, char **env)
 		{
 			exec_arg = copy_token(buff, " \n\t");
 			if (exec_arg[0] == NULL)
+			{
+				free_contents(exec_arg);
 				continue;
+			}
 			count = num_tokens(exec_arg);
 			i = _build(exec_arg, buff);
 			name_of_program = av[0];
@@ -37,11 +40,12 @@ int main(int ac, char **av, char **env)
 				name_of_command = exec_arg[0];
 				exec_from_path(exec_arg);
 			}
+			printf("shell: Free contents of exec arg\n");
 			free_contents(exec_arg);
 		}
 		else
 			exit_req(buff);
+		//free(buff);
 	}
-	free(buff);
 	return (0);
 }
