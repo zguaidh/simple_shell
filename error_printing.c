@@ -24,3 +24,19 @@ void print_error_exec(void)
 	_print_err(": ");
 	_print_err("not found\n");
 }
+/**
+ * cd_err - handles error printing for cd
+ *
+ * Return: no return value
+ */
+void cd_err(void)
+{
+	_print_err(name_of_program);
+	_print_err(": ");
+	print_number(count);
+	_print_err(": ");
+	_print_err(name_of_command);
+	_print_err(": can't cd to ");
+	_print_err(name_of_dst);
+	_print_err("\n");
+}

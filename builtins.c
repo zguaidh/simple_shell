@@ -11,18 +11,44 @@
  */
 void cd_req(char *str, char **env, char **exec_arg)
 {
+	int i = 0;
+	const char *home_dir = getenv("HOME"), *old_dir = getenv("OLDPWD");
+	char cwd[1024];
 	(void)str;
 	(void)env;
 
 	if (_strcmp(exec_arg[0], "cd") == 0)
 	{
-		if (exec_arg[1] == NULL)
+		if (exec_arg[1] == NULL || _strcmp(exec_arg[1], "") == 0)
 		{
-			chdir(getenv("HOME"));
+			if (home_dir != NULL)
+				i = chdir(home_dir);
+		}
+		else if (_strcmp(exec_arg[1], "-") == 0)
+		{
+			if (old_dir != NULL)
+				chdir(old_dir);
+		}
+		else
+			i = chdir(exec_arg[1]);
+		if (i != 0)
+		{
+			name_of_dst = exec_arg[1];
+			cd_err();
+			exit_status = errno;
 		}
 		else
 		{
-			chdir(exec_arg[1]);
+			if (getcwd(cwd, sizeof(cwd)) != NULL)
+			{
+				setenv("PWD", cwd, 1);
+				setenv("OLDPWD", cwd, 1);
+			}
+			else
+			{
+				perror("getcwd");
+				exit_status = 1;
+			}
 		}
 	}
 }

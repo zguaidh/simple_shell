@@ -71,12 +71,17 @@ char **copy_token(char *str, char *delim)
  */
 int num_tokens(char **str)
 {
-	int count = 0;
+	int count = 0, i = 0;
 
 	while (str[count] != NULL)
 	{
 		count++;
 	}
 
-	return (count);
+	if (count >= 1)
+	{
+		i = 1;
+	}
+
+	return (i);
 }

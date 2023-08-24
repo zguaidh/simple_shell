@@ -39,6 +39,7 @@ char **copy_token(char *str, char *delim);
 int num_tokens(char **str);
 char *name_of_program;
 char *name_of_command;
+char *name_of_dst;
 int count;
 int exit_status;
 void execute(char *filename, char **exec_arg);
@@ -72,5 +73,6 @@ int print_number(int n);
 /* Error printing */
 void print_error(void);
 void print_error_exec(void);
+void cd_err(void);
 
 #endif
