@@ -22,9 +22,11 @@ void execute(char *filename, char **exec_arg)
 				print_error_exec();
 				errno = 127;
 				free_contents(exec_arg);
+				free(filename);
 				exit(errno);
 			}
 		}
+		free(filename);
 	}
 	else
 	{

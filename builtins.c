@@ -141,7 +141,7 @@ void (*get_b(char *s, char **env, char **a))(char *s, char **env, char **a)
 int _build(char **exec_arg, char *buff, char **env)
 {
 	void (*func)(char *, char **, char **);
-	int exit_status;
+	/* int exit_status; */
 
 	func = get_b(exec_arg[0], env, exec_arg);
 	if (func == NULL)
@@ -153,5 +153,5 @@ int _build(char **exec_arg, char *buff, char **env)
 	}
 
 	func(buff, env, exec_arg);
-	return (exit_status);
+	return (0);
 }
