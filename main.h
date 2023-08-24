@@ -51,6 +51,7 @@ char **get_path(void);
 
 /* Builtins */
 
+void get_cwd(char *str, size_t size, char *var);
 void cd_req(char *str, char **env, char **exec_arg);
 void exit_req(char *str, char **env, char **args);
 void env_req(char *str, char **env, char **args);

@@ -12,13 +12,14 @@
 void cd_req(char *str, char **env, char **exec_arg)
 {
 	int i = 0;
-	const char *home_dir = getenv("HOME"), *old_dir = getenv("OLDPWD");
+	char *home_dir = getenv("HOME"), *old_dir = getenv("OLDPWD");
 	char cwd[1024];
-	(void)str;
-	(void)env;
+	(void)str, (void)env;
 
 	if (_strcmp(exec_arg[0], "cd") == 0)
 	{
+		get_cwd(cwd, sizeof(cwd), "OLDPWD");
+
 		if (exec_arg[1] == NULL || _strcmp(exec_arg[1], "") == 0)
 		{
 			if (home_dir != NULL)
@@ -27,7 +28,15 @@ void cd_req(char *str, char **env, char **exec_arg)
 		else if (_strcmp(exec_arg[1], "-") == 0)
 		{
 			if (old_dir != NULL)
-				chdir(old_dir);
+			{
+				i = chdir(old_dir);
+				_print(old_dir), _print("\n");
+			}
+			else
+			{
+				i = chdir(getenv("PWD"));
+				_print(getenv("PWD")), _print("\n");
+			}
 		}
 		else
 			i = chdir(exec_arg[1]);
@@ -39,16 +48,7 @@ void cd_req(char *str, char **env, char **exec_arg)
 		}
 		else
 		{
-			if (getcwd(cwd, sizeof(cwd)) != NULL)
-			{
-				setenv("PWD", cwd, 1);
-				setenv("OLDPWD", cwd, 1);
-			}
-			else
-			{
-				perror("getcwd");
-				exit_status = 1;
-			}
+			get_cwd(cwd, sizeof(cwd), "PWD");
 		}
 	}
 }

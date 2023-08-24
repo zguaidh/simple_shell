@@ -38,5 +38,5 @@ void cd_err(void)
 	_print_err(name_of_command);
 	_print_err(": can't cd to ");
 	_print_err(name_of_dst);
-	_print_err("\n");
+	write(2, "\n", 1);
 }

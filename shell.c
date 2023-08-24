@@ -12,7 +12,7 @@
 
 int main(int ac, char **av, char **env)
 {
-	char *buff = NULL, *prompt = ":) ", **exec_arg;
+	char *buff = NULL, *prompt = ":) ", **exec_arg = NULL;
 	ssize_t read;
 	size_t buff_len = 0;
 	int i = 0;
@@ -34,11 +34,11 @@ int main(int ac, char **av, char **env)
 				continue;
 			}
 			count += num_tokens(exec_arg);
-			i = _build(exec_arg, buff, env);
 			name_of_program = av[0];
+			name_of_command = exec_arg[0];
+			i = _build(exec_arg, buff, env);
 			if (i == -1)
 			{
-				name_of_command = exec_arg[0];
 				exec_from_path(exec_arg);
 			}
 			free_contents(exec_arg);
